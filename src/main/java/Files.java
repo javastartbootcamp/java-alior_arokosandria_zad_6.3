@@ -18,14 +18,14 @@ public class Files {
             while (scanner.hasNextLine()) {
                 String[] elements = scanner.nextLine().split(" ");
                 calculatorList.add(new Calculator(parseDouble(elements[0]), elements[1], parseDouble(elements[2])));
-                scanner.close();
             }
         }
     }
 
     public void viewFile() {
         for (Calculator calculator1 : calculatorList) {
-            System.out.println(calculator1.getNumber1() + " " + calculator1.getOperator() + " " + calculator1.getNumber2() + " = " + calculator1.calculatorResult());
+            System.out.println(calculator1.getNumber1() + " " + calculator1.getOperator()
+                    + " " + calculator1.getNumber2() + " = " + calculator1.calculatorResult());
         }
     }
 
@@ -33,7 +33,8 @@ public class Files {
         try (FileWriter fileWriter = new FileWriter("result.txt", false)) {
             for (Calculator calculator : calculatorList) {
 
-                fileWriter.append(calculator.getNumber1() + " " + calculator.getOperator() + " " + calculator.getNumber2() + " = " + calculator.calculatorResult() + "\n");
+                fileWriter.append(calculator.getNumber1() + " "
+                        + calculator.getOperator() + " " + calculator.getNumber2() + " = " + calculator.calculatorResult() + "\n");
 
             }
         } catch (IOException e) {
