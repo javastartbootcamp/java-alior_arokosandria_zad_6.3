@@ -10,31 +10,34 @@ import java.util.Scanner;
 import static java.lang.Double.parseDouble;
 
 public class Files {
-    public List<Calculator> calculatorList = new ArrayList<>();
+    ArrayList<MathematicalOperation> mathematicalOperationArrayList = new ArrayList<>();
 
-    public void readFile() throws FileNotFoundException {
+    public List<MathematicalOperation> readFile() throws FileNotFoundException {
+
         File file = new File("operations.txt");
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
                 String[] elements = scanner.nextLine().split(" ");
-                calculatorList.add(new Calculator(parseDouble(elements[0]), elements[1], parseDouble(elements[2])));
+                mathematicalOperationArrayList.add(new MathematicalOperation(parseDouble(elements[0]), elements[1], parseDouble(elements[2])));
             }
         }
+        return mathematicalOperationArrayList;
     }
 
     public void viewFile() {
-        for (Calculator calculator1 : calculatorList) {
-            System.out.println(calculator1.getNumber1() + " " + calculator1.getOperator()
-                    + " " + calculator1.getNumber2() + " = " + calculator1.calculatorResult());
+        for (MathematicalOperation mathematicalOperation : mathematicalOperationArrayList) {
+            System.out.println(mathematicalOperation.getNumber1() + " " + mathematicalOperation.getOperator()
+                    + " " + mathematicalOperation.getNumber2() + " = " + mathematicalOperation.mathematicalOperationResult());
         }
     }
 
     public void writeFile() {
         try (FileWriter fileWriter = new FileWriter("result.txt", false)) {
-            for (Calculator calculator : calculatorList) {
+            for (MathematicalOperation mathematicalOperation : mathematicalOperationArrayList) {
 
-                fileWriter.append(calculator.getNumber1() + " "
-                        + calculator.getOperator() + " " + calculator.getNumber2() + " = " + calculator.calculatorResult() + "\n");
+                fileWriter.append(mathematicalOperation.getNumber1() + " "
+                        + mathematicalOperation.getOperator() + " " + mathematicalOperation.getNumber2() + " = "
+                        + mathematicalOperation.mathematicalOperationResult() + "\n");
 
             }
         } catch (IOException e) {
